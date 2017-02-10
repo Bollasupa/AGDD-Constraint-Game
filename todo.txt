@@ -1,0 +1,15 @@
+1. Satisfy UI requirements (end and beginning screen)
+2. find a way to lock camera to 16:9
+3. Implement more modular enemy behaviours.
+4. Make material for shield on enemy
+5. Background music?
+6. Aquire explosion/shooting sounds
+7. Design level scheme (maybe a script gets called every X seconds)
+
+
+Already done:
+Basic UI
+Crosshair locked on-screen
+some enemy behaviours
+a basic enemy made up of behaviours
+shooting enemies works

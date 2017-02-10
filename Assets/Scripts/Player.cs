@@ -8,12 +8,16 @@ public class Player : MonoBehaviour{
     public GameObject crosshair;
     public Vector3 axis;
     public float moveSpeed = 1;
+    public float crosshairMaxVertical = 0.58f;
+    public float crosshairMaxHorizontal = 0.7f;
 
     private IProjectile weapon;
+    private Vector3 crosshairPosDelta = Vector3.zero;
+    
 
     private void Start()
     {
-        weapon = this.gameObject.AddComponent(typeof(BasicLaser)) as IProjectile;
+        weapon = this.gameObject.AddComponent<BasicLaser>() as IProjectile;
     }
 
     public void SetKeys(KeyCode left, KeyCode middle, KeyCode right){
@@ -26,7 +30,7 @@ public class Player : MonoBehaviour{
     {
         if (Input.GetKey(buttonLeft))
         {
-            crosshair.transform.position -= axis * moveSpeed * Time.deltaTime;
+            crosshairPosDelta = -1 * axis * moveSpeed * Time.deltaTime;
         }
         else if (Input.GetKeyDown(buttonMiddle))
         {
@@ -48,8 +52,29 @@ public class Player : MonoBehaviour{
         }
         if (Input.GetKey(buttonRight))
         {
-            crosshair.transform.position += axis * moveSpeed * Time.deltaTime;
+            crosshairPosDelta = axis * moveSpeed * Time.deltaTime;
         }
+    }
+
+    public void LateUpdate()
+    {
+        float deltaX = crosshairPosDelta.x;
+        float deltaXTotal = crosshair.transform.position.x + deltaX;
+        if((deltaXTotal < -crosshairMaxHorizontal) || (deltaXTotal > crosshairMaxHorizontal))
+        {
+            crosshairPosDelta.x = 0;
+        }
+
+        float deltaZ = crosshairPosDelta.z;
+        float deltaZTotal = crosshair.transform.position.z + deltaZ;
+        if ((deltaZTotal < -crosshairMaxVertical) || (deltaZTotal > crosshairMaxVertical))
+        {
+            crosshairPosDelta.z = 0;
+        }
+
+        crosshair.transform.position += crosshairPosDelta;
+
+        crosshairPosDelta = Vector3.zero;
     }
 
 
