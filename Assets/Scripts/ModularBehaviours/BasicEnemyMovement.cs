@@ -5,6 +5,8 @@ using UnityEngine;
 public class BasicEnemyMovement : MonoBehaviour {
 
     public float moveSpeed;
+
+
     private float rotateSpeed = 100f;
 
     private Vector3 angleToCam;
