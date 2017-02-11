@@ -6,6 +6,6 @@ public class BasicDeath : MonoBehaviour, IDieable{
 
 	public void Die()
     {
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 }

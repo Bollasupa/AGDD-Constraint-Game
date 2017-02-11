@@ -9,7 +9,7 @@
 
 Already done:
 Basic UI
-Crosshair locked on-screen
+Crosshair locked on-screen( only works on 16:9)
 some enemy behaviours
 a basic enemy made up of behaviours
 shooting enemies works

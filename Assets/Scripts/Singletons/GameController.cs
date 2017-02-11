@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
     public GameObject playerObject;
     public float moveSpeed = 0.02f;
+    public GameObject basicEnemy;
+    public int basicEnemyPoolSize;
+
 
     private GameObject player1, player2;
     private Player playerScript1, playerScript2;
 
+    private bool gameActive = false;
 
-    // Use this for initialization
-    void Start()
+    private void Start()
     {
         GameObject crosshair = GameObject.FindGameObjectWithTag("Crosshair");
 
@@ -32,4 +36,7 @@ public class GameController : MonoBehaviour
         playerScript2.axis = Vector3.right;
 
     }
+
+
+
 }

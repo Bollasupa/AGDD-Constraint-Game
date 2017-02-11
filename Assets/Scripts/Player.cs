@@ -76,6 +76,4 @@ public class Player : MonoBehaviour{
 
         crosshairPosDelta = Vector3.zero;
     }
-
-
 }
