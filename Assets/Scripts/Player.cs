@@ -40,28 +40,29 @@ public class Player : MonoBehaviour {
         }
         else if (Input.GetKeyDown(buttonMiddle))
         {
-			if ((Time.time - lastShot) > 2) {
-				lastShot = Time.time;
-				reloadBar.fillAmount = 0f;
+            if ((Time.time - lastShot) > 2)
+            {
+                lastShot = Time.time;
+                reloadBar.fillAmount = 0f;
 
-				Vector3 eye = Camera.main.transform.position;
-				Vector3 direction = crosshair.transform.position - eye;
-				Ray ray = new Ray(eye, direction);
-				RaycastHit hit;
+                Vector3 eye = Camera.main.transform.position;
+                Vector3 direction = crosshair.transform.position - eye;
+                Ray ray = new Ray(eye, direction);
+                RaycastHit hit;
 
-				if (Physics.Raycast(ray, out hit, 200) == true)
-				{
-					GameObject target = hit.collider.gameObject;
-					IShootable shootable = target.GetComponent(typeof(IShootable)) as IShootable;
-					if (shootable != null)
-					{
-						shootable.GetShot(weapon);
-					}
-					ShootLaser(hit.point);
-				}
-			} 
+                if (Physics.Raycast(ray, out hit, 200) == true)
+                {
+                    GameObject target = hit.collider.gameObject;
+                    IShootable shootable = target.GetComponent(typeof(IShootable)) as IShootable;
+                    if (shootable != null)
+                    {
+                        shootable.GetShot(weapon);
+                    }
+                    ShootLaser(hit.point);
+                }
+            }
 
-            
+
         }
 
         if (Input.GetKey(buttonRight))
@@ -97,8 +98,6 @@ public class Player : MonoBehaviour {
 
     public void ShootLaser(Vector3 target)
     {
-        Debug.Log("Shooting laser");
-
         Vector3 from = Camera.main.transform.position;
 
         if(playerSide == true)

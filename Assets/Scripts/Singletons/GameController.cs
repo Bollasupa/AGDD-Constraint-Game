@@ -7,9 +7,7 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public GameObject playerObject;
-    public float moveSpeed = 0.02f;
-    public GameObject basicEnemy;
-    public int basicEnemyPoolSize;
+    //public float moveSpeed = 0.02f;
     public Text counter;
     public Text Timer;
 	public Image reloadBarP1, reloadBarP2;
