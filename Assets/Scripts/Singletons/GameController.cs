@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour
     public List<GameObject> waves;
     public List<float> waveTimes;
 
+    public GameObject flipper;
+
     //never used?
     //Sprivate bool gameHasBegun = false;
 
@@ -35,6 +37,9 @@ public class GameController : MonoBehaviour
         GameObject crosshair = GameObject.FindGameObjectWithTag("Crosshair"); 
         player1 = Instantiate(playerObject);
         player2 = Instantiate(playerObject);
+
+        player1.tag = "Player1";
+        player2.tag = "Player2";
 
         playerScript1 = player1.GetComponent<Player>();
         playerScript2 = player2.GetComponent<Player>();
@@ -105,7 +110,23 @@ public class GameController : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
 
-        for(int i = 0; i < waves.Count; i++)
+        int flipperSeat = 5;
+
+        for(int i = 0; i < flipperSeat; i++)
+        {
+            Instantiate(waves[i]);
+            yield return new WaitForSeconds(waveTimes[i]);
+        }
+
+        GameObject theFlipper = Instantiate(flipper);
+       
+
+        while (theFlipper.activeInHierarchy)        {
+            yield return new WaitForSeconds(0.1f);   
+        }
+
+        Debug.Log(waves.Count);
+        for(int i = flipperSeat; i < waves.Count; i++)
         {
             Instantiate(waves[i]);
             yield return new WaitForSeconds(waveTimes[i]);
