@@ -44,13 +44,15 @@ public class Player : MonoBehaviour {
 
             if (Physics.Raycast(ray, out hit, 200) == true)
             {
-                Debug.Log("shooting");
                 GameObject target = hit.collider.gameObject;
                 IShootable shootable = target.GetComponent(typeof(IShootable)) as IShootable;
                 if (shootable != null)
                 {
                     shootable.GetShot(weapon);
                 }
+
+                
+                ShootLaser(hit.point);
             }
         }
 
@@ -83,7 +85,9 @@ public class Player : MonoBehaviour {
 
     public void ShootLaser(Vector3 target)
     {
-        Vector3 from = transform.position;
+        Debug.Log("Shooting laser");
+
+        Vector3 from = Camera.main.transform.position;
 
         if(playerSide == true)
         {
@@ -93,10 +97,11 @@ public class Player : MonoBehaviour {
             from.x += 5;
         }
 
-        //Quaternion rotation;
+        Vector3 direction = target - from;
+        direction.Normalize();
+        Quaternion rotation = Quaternion.LookRotation(direction);
 
-        //Quaternion.
-
-        //Instantiate(laser, from, 
+        GameObject shot = Instantiate(laser, from, rotation);
+        shot.GetComponent<LaserScript>().target = target;
     }
 }

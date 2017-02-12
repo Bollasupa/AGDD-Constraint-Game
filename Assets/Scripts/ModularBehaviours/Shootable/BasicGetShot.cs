@@ -26,11 +26,9 @@ public class BasicGetShot : MonoBehaviour, IShootable {
         {
             if(iDieable != null)
             {
-                Debug.Log("Killed with IDieable interface");
                 iDieable.Die();
             }else
             {
-                Debug.Log("Killed with destroy");
                 Destroy(this.gameObject);
             }
         }

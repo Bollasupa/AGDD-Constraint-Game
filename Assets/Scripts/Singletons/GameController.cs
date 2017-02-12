@@ -16,7 +16,9 @@ public class GameController : MonoBehaviour
     public List<GameObject> waves;
     public List<float> waveTimes;
 
-    private bool gameHasBegun = false;
+    //never used?
+    //Sprivate bool gameHasBegun = false;
+
     private float CountDownValue;
     private float TimeAtStartScene;
     private float timer = 120;
@@ -37,6 +39,9 @@ public class GameController : MonoBehaviour
 
             playerScript1 = player1.GetComponent<Player>();
             playerScript2 = player2.GetComponent<Player>();
+
+            playerScript1.playerSide = true;
+            playerScript2.playerSide = false;
 
             playerScript1.SetKeys(KeyCode.A, KeyCode.S, KeyCode.D);
             playerScript2.SetKeys(KeyCode.J, KeyCode.K, KeyCode.L);
