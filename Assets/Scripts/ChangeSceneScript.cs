@@ -13,15 +13,17 @@ public class ChangeSceneScript : MonoBehaviour {
 	}
 
 	void Update(){
-		if (Input.GetKeyDown (KeyCode.Space)) {
-			SceneManager.LoadScene("Level01");
-		}
-		if (SceneManager.GetActiveScene ().name.Equals ("EndScene")) {
-			if (Input.GetKeyDown (KeyCode.R)) {
-				SceneManager.LoadScene("Level01");
+		if (!SceneManager.GetActiveScene ().name.Equals ("Level01")) {
+			if (Input.GetKeyDown (KeyCode.Space)) {
+				SceneManager.LoadScene ("Level01");
 			}
-			if (Input.GetKeyDown (KeyCode.Escape)) {
-				Application.Quit ();
+			if (SceneManager.GetActiveScene ().name.Equals ("EndScene")) {
+				if (Input.GetKeyDown (KeyCode.R)) {
+					SceneManager.LoadScene ("Level01");
+				}
+				if (Input.GetKeyDown (KeyCode.Escape)) {
+					Application.Quit ();
+				}
 			}
 		}
 	}
