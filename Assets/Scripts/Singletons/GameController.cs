@@ -90,9 +90,13 @@ public class GameController : MonoBehaviour
         }
         if (timer <= 0.3 && gameActive == true)
         {
-           // End Game 
-           //Score?
+            SceneManager.LoadScene("EndScene");
             gameActive = false;
+        }
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
         }
 
     }
