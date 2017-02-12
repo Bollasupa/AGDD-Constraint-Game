@@ -20,8 +20,14 @@ public class BasicEnemyMovement : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	//void Update () {
+ //       gameObject.transform.position += angleToCam * Time.deltaTime * moveSpeed;
+ //       gameObject.transform.Rotate(rotation * rotateSpeed * Time.deltaTime);
+	//}
+
+    private void FixedUpdate()
+    {
         gameObject.transform.position += angleToCam * Time.deltaTime * moveSpeed;
         gameObject.transform.Rotate(rotation * rotateSpeed * Time.deltaTime);
-	}
+    }
 }
