@@ -22,9 +22,10 @@ public class GameController : MonoBehaviour
     private Player playerScript1, playerScript2;
 
     private bool gameActive = false;
-    public float CurrentTime;
-    public float Minutes { get { return Mathf.Floor(CurrentTime / 60f); } }
-    public float Seconds { get { return Mathf.Floor(CurrentTime % 60f); } }
+    private float CurrentTime;
+    private float Minutes { get { return Mathf.Floor(CurrentTime / 60f); } }
+    private float Seconds { get { return Mathf.Floor(CurrentTime % 60f); } }
+
     private void Start()
     {
             GameObject crosshair = GameObject.FindGameObjectWithTag("Crosshair"); 
@@ -42,6 +43,7 @@ public class GameController : MonoBehaviour
 
             playerScript1.axis = Vector3.forward;
             playerScript2.axis = Vector3.right;
+            
 
     }
     private void Update()
