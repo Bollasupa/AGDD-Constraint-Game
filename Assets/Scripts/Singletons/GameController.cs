@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     public int basicEnemyPoolSize;
     public Text counter;
     public Text Timer;
+	public Image reloadBarP1, reloadBarP2;
 
     public List<GameObject> waves;
     public List<float> waveTimes;
@@ -31,24 +32,26 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-            GameObject crosshair = GameObject.FindGameObjectWithTag("Crosshair"); 
-            player1 = Instantiate(playerObject);
-            player2 = Instantiate(playerObject);
+        GameObject crosshair = GameObject.FindGameObjectWithTag("Crosshair"); 
+        player1 = Instantiate(playerObject);
+        player2 = Instantiate(playerObject);
 
-            playerScript1 = player1.GetComponent<Player>();
-            playerScript2 = player2.GetComponent<Player>();
+        playerScript1 = player1.GetComponent<Player>();
+        playerScript2 = player2.GetComponent<Player>();
 
-            playerScript1.SetKeys(KeyCode.A, KeyCode.S, KeyCode.D);
-            playerScript2.SetKeys(KeyCode.J, KeyCode.K, KeyCode.L);
+        playerScript1.SetKeys(KeyCode.A, KeyCode.S, KeyCode.D);
+        playerScript2.SetKeys(KeyCode.J, KeyCode.K, KeyCode.L);
+		playerScript1.reloadBar = reloadBarP1;
+		playerScript2.reloadBar = reloadBarP2;
 
-            playerScript1.crosshair = crosshair;
-            playerScript2.crosshair = crosshair;
+        playerScript1.crosshair = crosshair;
+        playerScript2.crosshair = crosshair;
 
-            playerScript1.axis = Vector3.forward;
-            playerScript2.axis = Vector3.right;
+        playerScript1.axis = Vector3.forward;
+        playerScript2.axis = Vector3.right;
 
-            IEnumerator gameLoop = GameLoop();
-            StartCoroutine(gameLoop);
+        IEnumerator gameLoop = GameLoop();
+        StartCoroutine(gameLoop);
 
     }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
@@ -13,6 +14,8 @@ public class Player : MonoBehaviour {
     public float moveSpeed = 1;
     public float crosshairMaxVertical = 0.58f;
     public float crosshairMaxHorizontal = 0.7f;
+	private float lastShot;
+	public Image reloadBar;
 
     private IProjectile weapon;
     private Vector3 crosshairPosDelta = Vector3.zero;
@@ -37,27 +40,35 @@ public class Player : MonoBehaviour {
         }
         else if (Input.GetKeyDown(buttonMiddle))
         {
-            Vector3 eye = Camera.main.transform.position;
-            Vector3 direction = crosshair.transform.position - eye;
-            Ray ray = new Ray(eye, direction);
-            RaycastHit hit;
+			if ((Time.time - lastShot) > 2) {
+				Debug.Log (Time.time + " - " + lastShot);
+				lastShot = Time.time;
+				reloadBar.fillAmount = 0f;
 
-            if (Physics.Raycast(ray, out hit, 200) == true)
-            {
-                Debug.Log("shooting");
-                GameObject target = hit.collider.gameObject;
-                IShootable shootable = target.GetComponent(typeof(IShootable)) as IShootable;
-                if (shootable != null)
-                {
-                    shootable.GetShot(weapon);
-                }
-            }
+				Vector3 eye = Camera.main.transform.position;
+				Vector3 direction = crosshair.transform.position - eye;
+				Ray ray = new Ray (eye, direction);
+				RaycastHit hit;
+
+				if (Physics.Raycast (ray, out hit, 200) == true) {
+					Debug.Log ("shooting");
+					GameObject target = hit.collider.gameObject;
+					IShootable shootable = target.GetComponent (typeof(IShootable)) as IShootable;
+					if (shootable != null) {
+						shootable.GetShot (weapon);
+					}
+				}
+			} 
         }
 
         if (Input.GetKey(buttonRight))
         {
             crosshairPosDelta = axis * moveSpeed * Time.deltaTime;
         }
+
+		if (reloadBar.fillAmount < 1f) {
+			reloadBar.fillAmount += 1.0f / 2.0f * Time.deltaTime;
+		}
     }
 
     public void LateUpdate()
