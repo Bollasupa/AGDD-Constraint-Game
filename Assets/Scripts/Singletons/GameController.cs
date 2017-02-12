@@ -13,6 +13,9 @@ public class GameController : MonoBehaviour
     public Text counter;
     public Text Timer;
 
+    public List<GameObject> waves;
+    public List<float> waveTimes;
+
     private bool gameHasBegun = false;
     private float CountDownValue;
     private float TimeAtStartScene;
@@ -43,9 +46,12 @@ public class GameController : MonoBehaviour
 
             playerScript1.axis = Vector3.forward;
             playerScript2.axis = Vector3.right;
-            
+
+            IEnumerator gameLoop = GameLoop();
+            StartCoroutine(gameLoop);
 
     }
+
     private void Update()
     {
         if (gameActive == true)
@@ -85,6 +91,20 @@ public class GameController : MonoBehaviour
         }
 
     }
+
+    private IEnumerator GameLoop()
+    {
+        yield return new WaitForSeconds(3);
+
+        for(int i = 0; i < waves.Count; i++)
+        {
+            Instantiate(waves[i]);
+            yield return new WaitForSeconds(waveTimes[i]);
+        }
+
+    }
+
+
 
 
 
