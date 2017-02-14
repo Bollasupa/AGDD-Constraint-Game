@@ -17,9 +17,8 @@ public class GameController : MonoBehaviour
 
     public GameObject flipper;
 
-    //never used?
-    //Sprivate bool gameHasBegun = false;
 
+    private GameObject crosshair;
     private float CountDownValue;
     private float TimeAtStartScene;
     private float countDown = 4;
@@ -33,7 +32,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        GameObject crosshair = GameObject.FindGameObjectWithTag("Crosshair"); 
+        crosshair = GameObject.FindGameObjectWithTag("Crosshair"); 
         player1 = Instantiate(playerObject);
         player2 = Instantiate(playerObject);
 
@@ -117,15 +116,33 @@ public class GameController : MonoBehaviour
             yield return new WaitForSeconds(waveTimes[i]);
         }
 
+
+        //dirty hack to save time on the flipper things, 
+        //but flipper will only be called once so fuck it
         GameObject theFlipper = Instantiate(flipper);
-       
+
+        float waitingForFlipperTime = 0f;
 
         while (theFlipper.activeInHierarchy)        {
-            yield return new WaitForSeconds(0.1f);   
+            waitingForFlipperTime += Time.deltaTime;
+            yield return new WaitForSeconds(0.1f);  
+            if(waitingForFlipperTime > 5)
+            {
+                break;
+            } 
         }
 
+        Color temp;
+        Renderer X = crosshair.transform.GetChild(0).GetComponent<Renderer>();
+        Renderer Y = crosshair.transform.GetChild(1).GetComponent<Renderer>();
+        temp = X.material.color;
+        X.material.color = Y.material.color;
+        Y.material.color = temp;
+
+
+
         //Debug.Log(waves.Count);
-        for(int i = flipperSeat; i < waves.Count; i++)
+        for (int i = flipperSeat; i < waves.Count; i++)
         {
             Instantiate(waves[i]);
             yield return new WaitForSeconds(waveTimes[i]);
