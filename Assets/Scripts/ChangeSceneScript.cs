@@ -17,7 +17,7 @@ public class ChangeSceneScript : MonoBehaviour {
 			if (Input.GetKeyDown (KeyCode.Space)) {
 				SceneManager.LoadScene ("Level01");
 			}
-			if (SceneManager.GetActiveScene ().name.Equals ("EndScene")) {
+			if (SceneManager.GetActiveScene ().name.Equals ("EndScene") || SceneManager.GetActiveScene ().name.Equals ("WinScene")) {
 				if (Input.GetKeyDown (KeyCode.R)) {
 					SceneManager.LoadScene ("Level01");
 				}

@@ -95,7 +95,7 @@ public class GameController : MonoBehaviour
         }
         if (timer <= 0.3 && gameActive == true)
         {
-            SceneManager.LoadScene("EndScene");
+            SceneManager.LoadScene("WinScene");
             gameActive = false;
         }
 
