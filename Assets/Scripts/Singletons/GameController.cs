@@ -22,7 +22,6 @@ public class GameController : MonoBehaviour
 
     private float CountDownValue;
     private float TimeAtStartScene;
-    private float timer = 120;
     private float countDown = 4;
     private GameObject player1, player2;
     private Player playerScript1, playerScript2;
@@ -93,7 +92,7 @@ public class GameController : MonoBehaviour
             countDown -= Time.deltaTime;
             counter.text = countDown.ToString();
         }
-        if (timer <= 0.3 && gameActive == true)
+        if (CurrentTime < 0.1f && gameActive == true)
         {
             SceneManager.LoadScene("WinScene");
             gameActive = false;
@@ -125,7 +124,7 @@ public class GameController : MonoBehaviour
             yield return new WaitForSeconds(0.1f);   
         }
 
-        Debug.Log(waves.Count);
+        //Debug.Log(waves.Count);
         for(int i = flipperSeat; i < waves.Count; i++)
         {
             Instantiate(waves[i]);

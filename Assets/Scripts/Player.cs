@@ -100,12 +100,14 @@ public class Player : MonoBehaviour {
     {
         Vector3 from = Camera.main.transform.position;
 
+        from.z-= 10;
+
         if(playerSide == true)
         {
-            from.x -= 5;
+            from.x -= 10;
         }else
         {
-            from.x += 5;
+            from.x += 10;
         }
 
         Vector3 direction = target - from;
@@ -114,5 +116,7 @@ public class Player : MonoBehaviour {
 
         GameObject shot = Instantiate(laser, from, rotation);
         shot.GetComponent<LaserScript>().target = target;
+
+        GetComponent<AudioSource>().Play();
     }
 }
